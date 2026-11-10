@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BudgetBuddy - Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="index.html"><span class="logo" aria-hidden="true"></span>BudgetBuddy</a>
+      <nav aria-label="Main">
+        <a href="index.html" aria-current="page">Dashboard</a>
+        <a href="#">Transactions</a>
+        <a href="#">Budgets</a>
+        <a href="#">Goals</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+      </nav>
+      <a class="logout" href="login.html" style="color:#c9d6ea;font-weight:600;text-decoration:none;padding:11px 14px">Logout</a>
+    </aside>
+
+    <main class="content">
+      <div class="topbar">
+        <input type="search" aria-label="Search transactions" placeholder="Search transactions...">
+        <span class="user">John Doe</span>
+      </div>
+
+      <section class="welcome">
+        <h1>Welcome back, John!</h1>
+        <p>Here's your financial overview for this month.</p>
+        <p class="note">Sample data for illustration only.</p>
+      </section>
+
+      <section class="stats" aria-label="Summary">
+        <div class="stat stat-income">
+          <div class="label">Total Income</div>
+          <div class="value">$3,500</div>
+          <div class="delta">Up 12% from last month</div>
+        </div>
+        <div class="stat stat-expense">
+          <div class="label">Total Expenses</div>
+          <div class="value">$2,180</div>
+          <div class="delta">Up 8% from last month</div>
+        </div>
+        <div class="stat stat-balance">
+          <div class="label">Current Balance</div>
+          <div class="value">$1,320</div>
+          <div class="delta">Up 15% from last month</div>
+        </div>
+      </section>
+
+      <div class="grid-two">
+        <section class="panel" aria-labelledby="spend-h">
+          <h2 id="spend-h">Spending Overview</h2>
+          <div class="spend">
+            <div class="donut" role="img" aria-label="Spending split: Housing 35 percent, Food 20, Transport 15, Entertainment 10, Other 20">
+              <div class="donut-inner"><strong>$2,180</strong>Total Expenses</div>
+            </div>
+            <ul class="legend">
+              <li><i style="background:#2563eb"></i>Housing <b>35%</b></li>
+              <li><i style="background:#7c3aed"></i>Food <b>20%</b></li>
+              <li><i style="background:#ea580c"></i>Transport <b>15%</b></li>
+              <li><i style="background:#059669"></i>Entertainment <b>10%</b></li>
+              <li><i style="background:#64748b"></i>Other <b>20%</b></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="tx-h">
+          <h2 id="tx-h">Recent Transactions</h2>
+          <ul class="tx">
+            <li><span>Grocery Store<small>Food &middot; Apr 24</small></span><span class="amt">-$54.32</span></li>
+            <li><span>Salary<small>Income &middot; Apr 25</small></span><span class="amt">+$1,800.00</span></li>
+            <li><span>Gas Station<small>Transport &middot; Apr 24</small></span><span class="amt">-$45.00</span></li>
+            <li><span>Netflix<small>Entertainment &middot; Apr 22</small></span><span class="amt">-$15.99</span></li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="panel" aria-labelledby="bud-h">
+        <h2 id="bud-h">Monthly Budget Progress</h2>
+        <div class="budgets">
+          <div class="budget">
+            <div class="top"><span>Food</span><span>$120 / $300</span></div>
+            <div class="bar"><span style="width:40%"></span></div>
+          </div>
+          <div class="budget">
+            <div class="top"><span>Transport</span><span>$100 / $200</span></div>
+            <div class="bar"><span style="width:50%"></span></div>
+          </div>
+          <div class="budget">
+            <div class="top"><span>Entertainment</span><span>$60 / $200</span></div>
+            <div class="bar"><span style="width:30%"></span></div>
+          </div>
+          <div class="budget">
+            <div class="top"><span>Other</span><span>$80 / $150</span></div>
+            <div class="bar"><span style="width:53%"></span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BudgetBuddy - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-page">
+    <aside class="auth-side">
+      <a class="brand" href="index.html"><span class="logo" aria-hidden="true"></span>BudgetBuddy</a>
+      <h1>Track Your Money. Build a Better Tomorrow.</h1>
+      <p>BudgetBuddy helps you manage your finances, track your spending, and reach your goals, all in one place.</p>
+      <svg class="auth-art" viewBox="0 0 320 180" role="img" aria-label="Rising bar chart">
+        <rect x="10" y="10" width="300" height="160" rx="12" fill="#1b3c6e"/>
+        <rect x="50" y="110" width="30" height="40" fill="#2563eb"/>
+        <rect x="100" y="90" width="30" height="60" fill="#2563eb"/>
+        <rect x="150" y="70" width="30" height="80" fill="#2563eb"/>
+        <rect x="200" y="45" width="30" height="105" fill="#2563eb"/>
+        <polyline points="55,95 110,75 165,55 220,30" fill="none" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <div class="auth-points">
+        <div><strong>Secure</strong><span>Your data is safe with us.</span></div>
+        <div><strong>Simple</strong><span>Easy to use, anytime, anywhere.</span></div>
+        <div><strong>Achieve</strong><span>Build better financial habits.</span></div>
+      </div>
+    </aside>
+
+    <main class="auth-main">
+      <form class="form-card" action="#" method="post">
+        <div style="text-align:center"><a class="brand brand-dark" href="index.html"><span class="logo" aria-hidden="true"></span>BudgetBuddy</a></div>
+        <h2>Welcome Back</h2>
+        <p class="lead">Log in to your account</p>
+
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input id="email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+        </div>
+
+        <div class="row-between">
+          <label class="check"><input type="checkbox" name="remember"> Remember me</label>
+          <a href="login.html">Forgot password?</a>
+        </div>
+
+        <button class="btn" type="submit">Log In</button>
+
+        <p class="switch">Don't have an account? <a href="register.html">Register</a></p>
+      </form>
+    </main>
+  </div>
+</body>
+</html>
