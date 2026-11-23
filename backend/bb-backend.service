@@ -1,0 +1,14 @@
+[Unit]
+Description=BudgetBuddy backend API
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/budgetbuddy/backend
+EnvironmentFile=/opt/budgetbuddy/backend/.env
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+User=bbapi
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
