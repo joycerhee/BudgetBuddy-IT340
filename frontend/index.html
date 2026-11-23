@@ -6,7 +6,7 @@
   <title>BudgetBuddy - Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="visibility:hidden">
   <div class="app">
     <aside class="sidebar">
       <a class="brand" href="index.html"><span class="logo" aria-hidden="true"></span>BudgetBuddy</a>
@@ -18,17 +18,17 @@
         <a href="#">Reports</a>
         <a href="#">Settings</a>
       </nav>
-      <a class="logout" href="login.html" style="color:#c9d6ea;font-weight:600;text-decoration:none;padding:11px 14px">Logout</a>
+      <a class="logout" id="logout-link" href="login.html" style="color:#c9d6ea;font-weight:600;text-decoration:none;padding:11px 14px">Logout</a>
     </aside>
 
     <main class="content">
       <div class="topbar">
         <input type="search" aria-label="Search transactions" placeholder="Search transactions...">
-        <span class="user">John Doe</span>
+        <span class="user" id="user-name"></span>
       </div>
 
       <section class="welcome">
-        <h1>Welcome back, John!</h1>
+        <h1>Welcome back, <span id="first-name"></span>!</h1>
         <p>Here's your financial overview for this month.</p>
         <p class="note">Sample data for illustration only.</p>
       </section>
@@ -102,5 +102,33 @@
       </section>
     </main>
   </div>
+
+  <script>
+    /* Milestone 2: only logged-in users can see the dashboard.
+       The session cookie is HttpOnly, so we ask the backend who is logged in. */
+    fetch('/api/me', { credentials: 'same-origin' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('not logged in');
+        return res.json();
+      })
+      .then(function (data) {
+        var name = data.user.name;
+        // textContent (not innerHTML) so a name can never inject HTML or scripts.
+        document.getElementById('user-name').textContent = name;
+        document.getElementById('first-name').textContent = name.split(' ')[0];
+        document.body.style.visibility = 'visible';
+      })
+      .catch(function () {
+        window.location.replace('login.html');
+      });
+
+    document.getElementById('logout-link').addEventListener('click', function (e) {
+      e.preventDefault();
+      fetch('/api/logout', { method: 'POST', credentials: 'same-origin' })
+        .finally(function () {
+          window.location.replace('login.html');
+        });
+    });
+  </script>
 </body>
 </html>

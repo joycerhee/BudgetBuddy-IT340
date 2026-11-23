@@ -43,6 +43,8 @@
           <input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
         </div>
 
+        <p id="login-notice" role="status" hidden style="margin:0 0 14px;color:#047857;font-size:14px;font-weight:600">Account created. You can log in now.</p>
+
         <p id="login-error" role="alert" hidden style="margin:0 0 14px;color:#b91c1c;font-size:14px;font-weight:600">Incorrect email or password.</p>
 
         <div class="row-between">
@@ -58,16 +60,54 @@
   </div>
 
   <script>
-    /* Milestone 1 placeholder only. Real authentication (backend, hashed passwords)
-       replaces this in Milestone 2. */
-    document.getElementById('login-form').addEventListener('submit', function (e) {
+    /* Milestone 2: sends the email and password to the backend API (/api/login).
+       Nginx on the front-end VM forwards /api/ to the back-end VM. */
+    var form = document.getElementById('login-form');
+    var errorBox = document.getElementById('login-error');
+    var notice = document.getElementById('login-notice');
+    var button = form.querySelector('button[type="submit"]');
+
+    if (new URLSearchParams(window.location.search).get('registered') === '1') {
+      notice.hidden = false;
+    }
+
+    function showError(message) {
+      notice.hidden = true;
+      errorBox.textContent = message;
+      errorBox.hidden = false;
+    }
+
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var password = document.getElementById('password').value;
-      if (password === 'it340') {
-        window.location.href = 'index.html';
-      } else {
-        document.getElementById('login-error').hidden = false;
-      }
+      errorBox.hidden = true;
+      button.disabled = true;
+      button.textContent = 'Logging in...';
+
+      fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          email: document.getElementById('email').value,
+          password: document.getElementById('password').value
+        })
+      })
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            if (res.ok && data.ok) {
+              window.location.href = 'index.html';
+            } else {
+              showError(data.error || 'Incorrect email or password.');
+            }
+          });
+        })
+        .catch(function () {
+          showError('Could not reach the server. Please try again.');
+        })
+        .finally(function () {
+          button.disabled = false;
+          button.textContent = 'Log In';
+        });
     });
   </script>
 </body>

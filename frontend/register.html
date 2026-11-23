@@ -63,16 +63,56 @@
   </div>
 
   <script>
-    /* Milestone 1 placeholder only. Real account creation is added in Milestone 2. */
-    document.getElementById('register-form').addEventListener('submit', function (e) {
+    /* Milestone 2: creates the account through the backend API (/api/register).
+       The password is hashed on the server before it is stored. */
+    var form = document.getElementById('register-form');
+    var errorBox = document.getElementById('register-error');
+    var button = form.querySelector('button[type="submit"]');
+
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.hidden = false;
+    }
+
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
+      errorBox.hidden = true;
       var password = document.getElementById('password').value;
       var confirm = document.getElementById('confirm').value;
       if (password !== confirm) {
-        document.getElementById('register-error').hidden = false;
+        showError('Passwords do not match.');
         return;
       }
-      window.location.href = 'login.html';
+
+      button.disabled = true;
+      button.textContent = 'Creating account...';
+
+      fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          password: password
+        })
+      })
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            if (res.ok && data.ok) {
+              window.location.href = 'login.html?registered=1';
+            } else {
+              showError(data.error || 'Could not create your account.');
+            }
+          });
+        })
+        .catch(function () {
+          showError('Could not reach the server. Please try again.');
+        })
+        .finally(function () {
+          button.disabled = false;
+          button.textContent = 'Register';
+        });
     });
   </script>
 </body>
